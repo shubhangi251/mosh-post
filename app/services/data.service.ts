@@ -11,12 +11,13 @@ import 'rxjs/add/observable/throw';
 
 @Injectable()
 export class DataService {
-  constructor(private url: string, private http: Http) { }
+  constructor(private url: string, private http: Http) 
+  {}
 
   getAll() {
     return this.http.get(this.url)
       .map(response => response.json())
-      .catch(this.handleError);
+      // .catch(this.handleError);
   }
 
   get(id) { 
@@ -43,7 +44,7 @@ export class DataService {
       .toPromise()
       .catch(this.handleError);
   }
-
+  
   private handleError(error: Response) {
     if (error.status === 400)
       return Observable.throw(new BadInput(error.json()));
